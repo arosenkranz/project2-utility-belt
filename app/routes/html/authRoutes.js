@@ -6,17 +6,18 @@ const isAuthenticated = require('../../utils/middleware/isAuthenticated');
 router.use(isAuthenticated);
 
 // only get to new posts
-router.get('/posts/new', (req, res) => {
-  res.sendFile(__dirname, '../../public/cms.html');
+router.get('/new', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/cms.html'));
 });
 
 // edit a post
-router.get('/posts/edit/:postId', (req, res) => {
-  res.sendFile(__dirname, '../../public/cms.html');
+router.get('/edit/:postId', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/cms.html'));
 });
 
-router.get('/users/:username', (req, res) => {
-  res.sendFile(__dirname, '../../public/user.html');
+// find posts by user
+router.get('/:username', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/user.html'));
 });
 
 module.exports = router;

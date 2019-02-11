@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<title>Create A Post</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Alex's Cool Blog</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav d-flex w-100">
+      <a class="nav-item nav-link" href="/posts/new">New Post</a>
+      <a class="nav-item nav-link ml-auto" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a class="nav-item nav-link" href="register"><i class="fas fa-user"></i>Register</a>
+    </div>
+  </div>
+</nav>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-7">
+      <h3>Create / Edit A Post</h3>
+      <form id="post-form">
+        <div class="form-group">
+          <label for="post-title">Post Title</label>
+          <input type="text" class="form-control" id="post-title">
+        </div>
+        <div class="form-group">
+          <label for="post-body">Post Body</label>
+          <textarea class="form-control" id="post-body"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category-select">Select A Category</label>
+          <select id="category-select" multiple class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label for="category-input">Create A Category</label>
+          <input type="text" id="category-input" class="form-control" />
+        </div>
+        <div class="form-group custom-file mb-5">
+          <input type="file" class="custom-file-input" id="image-input">
+          <label class="custom-file-label" for="image-input">Choose file</label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-block btn-dark">Create Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="/assets/js/posts.js"></script>
+</body>
+</html>

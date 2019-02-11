@@ -36,6 +36,9 @@ module.exports = {
       });
   },
   create: async function(req, res) {
+
+    
+
     // find or create category
     const [catError, dbCategory] = await promiseHandler(
       db.Categories.findOrCreate({
@@ -55,7 +58,8 @@ module.exports = {
       db.Posts.create({
         title: req.body.title,
         body: req.body.body,
-        photo: req.body.photoUrl
+        photo: req.body.photoUrl,
+        UserId: req.user.id
       })
     );
 
@@ -64,12 +68,12 @@ module.exports = {
       return res.status(400).json(postError);
     }
 
+    // create pairings for multiple category creates
+    const postCategories = req.body.categoryList.map(category => {PostId: dbPost.id, CategoryId: category})
+
     // create relationship between post and category
     const [postCatErr, dbPostCat] = await promiseHanlder(
-      db.PostCategories.create({
-        PostId: dbPost.id,
-        CategoryId: dbCategory.id
-      })
+      db.PostCategories.bulkCreate(postCategories, {returning: true});
     );
 
     console.log(dbPostCat);

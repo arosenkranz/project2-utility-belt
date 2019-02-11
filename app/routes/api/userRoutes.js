@@ -9,13 +9,24 @@ router
   .post(userController.register);
 
 router
+  .route('/status')
+  .get(userController.userCheck);
+
+router
+  .route('/login')
+  .post(passport.authenticate('local'), userController.login);
+
+router
+  .route('/logout')
+  .get((req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
+router
   .route('/:username')
   .get(userController.findByName)
   .put(userController.update)
   .delete(userController.delete);
-
-router
-  .route('/login')
-  .get(passport.authenticate('passport'), userController.login);
 
 module.exports = router;

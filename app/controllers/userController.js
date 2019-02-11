@@ -29,6 +29,14 @@ module.exports = {
         res.status(404).json(err);
       });
   },
+  userCheck: function(req, res) {
+    if (req.user) {
+      return res.json(req.user);
+    }
+    else {
+      return res.status(422).json({error: "Not logged in!"})
+    }
+  },
   update: function (req, res) {
     db
       .Users
@@ -67,7 +75,7 @@ module.exports = {
       }
     */
     db
-      .User
+      .Users
       .create(req.body)
       .then(function (userInfo) {
         // Upon successful signup, log user in

@@ -16,7 +16,6 @@ module.exports = function (sequelize, DataTypes) {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
       unique: true
     },
     // The email cannot be null, and must be a proper email before creation
@@ -37,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   Users.prototype.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
+    return bcryptjs.compareSync(password, this.password);
   };
 
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
@@ -45,7 +44,8 @@ module.exports = function (sequelize, DataTypes) {
   Users.hook("beforeCreate", function (user) {
     user.full_name = `${user.first_name} ${user.last_name}`;
     user.username = user.full_name.toLowerCase().replace(/\s/g, '');
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10), null);
+    console.log(user);
   });
 
   Users.associate = function (models) {
