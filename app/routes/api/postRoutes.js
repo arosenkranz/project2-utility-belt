@@ -1,12 +1,17 @@
 const router = require('express').Router();
-const passport = require('../../utils/middleware/passport-local');
-const postController = require('../../controllers/postController.js');
+const cloudinaryMiddleware = require('../../utils/middleware/cloudinary');
+const categoryCheckMiddleware = require('../../utils/middleware/categoryCheck');
+const postController = require('../../controllers/postController');
 
 // matches with '/api/posts'
 router
   .route('/')
   .get(postController.findAll)
-  .post(postController.create);
+  .post(
+    cloudinaryMiddleware, 
+    categoryCheckMiddleware, 
+    postController.create
+    );
 
 router
   .route('/:id')

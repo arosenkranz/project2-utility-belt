@@ -35,9 +35,10 @@ $(document).ready(function () {
     if (newCategory) {
       postData.newCategory = newCategory;
     }
+    console.log(postData);
 
     // get image data (only works for single file, not multiple)
-    const imageData = $("#image-input").props("files")[0];
+    const imageData = document.getElementById("image-input").files[0];
 
     // create formData object (needed for sending image)
     const form = new FormData();
@@ -45,7 +46,10 @@ $(document).ready(function () {
     form.append('body', postData.body);
     form.append('categoryList', postData.categoryList);
     form.append('newCategory', postData.newCategory);
-    form.append('image', imageData);
+
+    if (imageData) {
+      form.append('photo', imageData, imageData.name);
+    }
 
     $.ajax({
       url: "/api/posts",
@@ -60,4 +64,13 @@ $(document).ready(function () {
     });
 
   });
+
+
+  $("#image-input").on("change", function() {
+    const image = document.getElementById("image-input").files[0];
+    console.log(image);
+
+    $(".custom-file-label").text(image.name);
+  })
+
 });

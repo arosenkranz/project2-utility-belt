@@ -14,7 +14,24 @@ router
 
 router
   .route('/login')
-  .post(passport.authenticate('local'), userController.login);
+  .post(function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+      if (err) {
+        return next(err); // will generate a 500 error
+      }
+      console.log(info);
+      // Generate a JSON response reflecting authentication status
+      if (!user) {
+        return res.json({ success: false, ...info });
+      }
+      req.login(user, loginErr => {
+        if (loginErr) {
+          return next(loginErr);
+        }
+        return res.json({ success: true, message: 'authentication succeeded', url: "/" });
+      });
+    })(req, res, next)
+  });
 
 router
   .route('/logout')

@@ -88,7 +88,7 @@ module.exports = {
                 .json(err);
             }
             console.log(req.user);
-            return res.json("/members");
+            return res.json("/");
           });
       })
       .catch(function (err) {
@@ -100,6 +100,6 @@ module.exports = {
   },
   login: function(req, res) {
     console.log(req.user);
-    res.json("/members");
+    res.json("/");
   }
 }
